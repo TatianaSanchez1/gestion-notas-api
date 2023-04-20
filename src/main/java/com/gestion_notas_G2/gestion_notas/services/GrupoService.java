@@ -23,8 +23,8 @@ import java.util.Optional;
         }
     }
 
-    public List<Grupo> getGruposByProfesor(Long id) throws Exception {
-        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findGrupoByPeriodoAcademico_VigenteAndProfesor_Id(true, id));
+    public List<Grupo> getGruposByProfesor(Long idProfesor) throws Exception {
+        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findGrupoByPeriodoAcademico_VigenteAndProfesor_Id(true, idProfesor));
         if(optionalGrupos.isPresent()){
             return optionalGrupos.get();
         }else{

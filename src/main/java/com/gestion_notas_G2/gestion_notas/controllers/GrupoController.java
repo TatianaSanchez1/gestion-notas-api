@@ -21,7 +21,7 @@ public class GrupoController {
        this.grupoService = grupoService;
     }
 
-    @GetMapping("api/grupos")
+    @GetMapping("api/grupos/")
     public ResponseEntity<Object> getGrupos(){
         try {
             List<Grupo> grupos = grupoService.getGrupos();
@@ -31,10 +31,10 @@ public class GrupoController {
         }
     }
 
-    @GetMapping("/api/{id}/grupos/")
-    public ResponseEntity<Object> getGruposByProfesor(@PathVariable Long id){
+    @GetMapping("/api/{idProfesor}/grupos/")
+    public ResponseEntity<Object> getGruposByProfesor(@PathVariable Long idProfesor){
         try {
-            List<Grupo> grupos = grupoService.getGruposByProfesor(id);
+            List<Grupo> grupos = grupoService.getGruposByProfesor(idProfesor);
             return new ResponseEntity<>(grupos, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
