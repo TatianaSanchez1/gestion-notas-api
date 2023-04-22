@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface GrupoRepository extends JpaRepository<Grupo, String> {
-
-    public List<Grupo> findGrupoByPeriodoAcademico_VigenteAndProfesor_Id(Boolean vigente, Long id);
-    
+    public List<Grupo> findAllByPeriodoAcademico_VigenteAndProfesor_Id(Boolean vigente, Long id);
 }

@@ -21,16 +21,6 @@ public class GrupoController {
        this.grupoService = grupoService;
     }
 
-    @GetMapping("api/grupos/")
-    public ResponseEntity<Object> getGrupos(){
-        try {
-            List<Grupo> grupos = grupoService.getGrupos();
-            return new ResponseEntity<>(grupos, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @GetMapping("/api/{idProfesor}/grupos/")
     public ResponseEntity<Object> getGruposByProfesor(@PathVariable Long idProfesor){
         try {

@@ -14,21 +14,7 @@ import java.util.Optional;
         this.grupoRepository = grupoRepository;
     }
 
-    public List<Grupo> getGrupos() throws Exception {
-        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findAll());
-        if(optionalGrupos.isPresent()){
-            return optionalGrupos.get();
-        }else{
-            throw new Exception("No se encontraron Grupos");
-        }
-    }
-
     public List<Grupo> getGruposByProfesor(Long idProfesor) throws Exception {
-        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findGrupoByPeriodoAcademico_VigenteAndProfesor_Id(true, idProfesor));
-        if(optionalGrupos.isPresent()){
-            return optionalGrupos.get();
-        }else{
-            throw  new Exception("No se encontraron grupos");
-        }
+        return this.grupoRepository.findAllByPeriodoAcademico_VigenteAndProfesor_Id(true, idProfesor);
     }
 }

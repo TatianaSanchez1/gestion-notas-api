@@ -19,20 +19,19 @@ public class ActividadEvaluativaController {
     }
 
     @GetMapping("api/actividades_evaluativas/")
-    public ResponseEntity<Object> getActividadesEvaluativas(){
+    public ResponseEntity<Object> getActividadEvaluativaList(){
         try {
-            List<ActividadEvaluativa> actividadEvaluativaList = actividadEvaluativaService.getActividadesEvaluativas();
+            List<ActividadEvaluativa> actividadEvaluativaList = actividadEvaluativaService.getActividadEvaluativaList();
             return new ResponseEntity<>(actividadEvaluativaList, HttpStatus.OK);
-
         }catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("api/{codigoGrupo}/actividades_evaluativas/")
-    public ResponseEntity<Object> getActividadesEvaluativasByGrupo(@PathVariable String codigoGrupo) {
+    public ResponseEntity<Object> getActividadEvaluativaListByGrupo(@PathVariable String codigoGrupo) {
         try {
-            List<ActividadEvaluativa> actividadEvaluativaList = actividadEvaluativaService.getActividadesEvaluativasByGrupo(codigoGrupo);
+            List<ActividadEvaluativa> actividadEvaluativaList = actividadEvaluativaService.getActividadEvaluativaListByGrupo(codigoGrupo);
             return new ResponseEntity<>(actividadEvaluativaList, HttpStatus.OK);
 
         }catch (Exception e) {
@@ -40,10 +39,10 @@ public class ActividadEvaluativaController {
         }
     }
 
-    @PostMapping("api/actividades_evaluativas/")
-    public ResponseEntity<Object> postActividadesEvaluativas(@RequestBody List<ActividadEvaluativa> actividadEvaluativaList) {
+    @PostMapping("api/{codigoGrupo}/actividades_evaluativas/")
+    public ResponseEntity<Object> postActividadEvaluativaList(@RequestBody List<ActividadEvaluativa> actividadEvaluativaList, @PathVariable String codigoGrupo) {
         try {
-            List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaService.postActividadesEvaluativas(actividadEvaluativaList);
+            List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaService.postActivadEvaluativaList(actividadEvaluativaList, codigoGrupo);
             return new ResponseEntity<>(actividadEvaluativas, HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

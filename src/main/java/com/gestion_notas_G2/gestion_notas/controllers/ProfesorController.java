@@ -2,6 +2,8 @@ package com.gestion_notas_G2.gestion_notas.controllers;
 
 import com.gestion_notas_G2.gestion_notas.models.Profesor;
 import com.gestion_notas_G2.gestion_notas.services.ProfesorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +20,22 @@ public class ProfesorController {
     }
 
     @GetMapping("/api/profesores")
-    public List<Profesor> getProfesores(){
-        return this.profesorService.getProfesores();
+    public ResponseEntity<Object> getProfesores(){
+        try {
+            List<Profesor> profesorList = this.profesorService.getProfesores();
+            return new ResponseEntity<>(profesorList, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/api/profesores")
-    public Profesor postProfesor(@RequestBody Profesor profesor){
-        return this.profesorService.postProfesor(profesor);
+    public ResponseEntity<Object> postProfesor(@RequestBody Profesor profesor){
+        try {
+            Profesor newProfesor = this.profesorService.postProfesor(profesor);
+            return new ResponseEntity<>(newProfesor, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

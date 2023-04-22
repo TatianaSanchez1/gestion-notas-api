@@ -15,41 +15,30 @@ public class ActividadEvaluativaService {
         this.actividadEvaluativaRepository = actividadEvaluativaRepository;
     }
 
-    public List<ActividadEvaluativa> getActividadesEvaluativas() throws Exception {
-        Optional<List<ActividadEvaluativa>> optionalActividadEvaluativas = Optional.ofNullable(this.actividadEvaluativaRepository.findAll());
-        if (optionalActividadEvaluativas.isPresent()) {
-            return optionalActividadEvaluativas.get();
-        } else {
-            throw new Exception("No se encontraron Actividades Evalautivas");
-        }
+    public List<ActividadEvaluativa> getActividadEvaluativaList()  {
+        return this.actividadEvaluativaRepository.findAll();
     }
 
-    public List<ActividadEvaluativa> getActividadesEvaluativasByGrupo(String codigoGrupo) throws Exception {
-        Optional<List<ActividadEvaluativa>> optionalActividadEvaluativas = Optional.ofNullable(this.actividadEvaluativaRepository.findActividadEvaluativaByGrupo_CodigoGrupo(codigoGrupo));
-        if (optionalActividadEvaluativas.isPresent()) {
-            return optionalActividadEvaluativas.get();
-        } else {
-            throw new Exception("No se encontraron Actividades Evalautivas");
+    public List<ActividadEvaluativa> getActividadEvaluativaListByGrupo(String codigoGrupo) {
+        return this.actividadEvaluativaRepository.findAllByGrupo_CodigoGrupo(codigoGrupo);
+    }
+    public List<ActividadEvaluativa> postActivadEvaluativaList(List<ActividadEvaluativa> actividadEvaluativaList, String codigoGrupo) throws Exception {
+        List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaRepository.findAllByGrupo_CodigoGrupo(codigoGrupo);
+        if(actividadEvaluativas.isEmpty()){
+            try {
+                return this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+            } catch (Exception e){
+                throw new Exception("Ha ocurrido un error al guardar los datos");
+            }
+        }
+        else {
+            try {
+                actividadEvaluativas.removeIf(evaluacion -> actividadEvaluativaList.contains(evaluacion));
+                this.actividadEvaluativaRepository.deleteAll(actividadEvaluativas);
+                return this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+            }catch (Exception e){
+                throw new Exception("Ha ocurrido un error al guardar los datos");
+            }
         }
     }
-
-    public ActividadEvaluativa postActividadEvaluativa(ActividadEvaluativa actividadEvaluativa) throws Exception {
-        Optional<ActividadEvaluativa> optionalActividadEvaluativa = Optional.ofNullable(this.actividadEvaluativaRepository.save(actividadEvaluativa));
-        if (optionalActividadEvaluativa.isPresent()) {
-            return optionalActividadEvaluativa.get();
-        } else {
-            throw new Exception("Error al guardar en la base de datos");
-        }
-    }
-
-    public List<ActividadEvaluativa> postActividadesEvaluativas(List<ActividadEvaluativa> actividadEvaluativaList) throws Exception {
-        Optional<List<ActividadEvaluativa>> optionalActividadEvaluativas = Optional.ofNullable(this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList));
-        if (optionalActividadEvaluativas.isPresent()) {
-            return optionalActividadEvaluativas.get();
-        } else {
-            throw new Exception("Error al guardar en la base de datos");
-        }
-    }
-
-
 }

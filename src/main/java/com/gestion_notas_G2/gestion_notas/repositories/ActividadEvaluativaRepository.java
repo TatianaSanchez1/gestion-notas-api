@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ActividadEvaluativaRepository extends JpaRepository<ActividadEvaluativa, Long> {
-
-    public List<ActividadEvaluativa> findActividadEvaluativaByGrupo_CodigoGrupo(String codigoGrupo);
+    public List<ActividadEvaluativa> findAllByGrupo_CodigoGrupo(String codigoGrupo);
 }
