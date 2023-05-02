@@ -19,3 +19,10 @@ Este módulo ha sido desarrollado utilizando las siguientes tecnologías:
 - Framework de back-end: Spring Boot
 - Framework de front-end: Angular
 - Base de datos: MySQL
+
+## Documentación API
+Para visualizar la documentación de la API con Swagger, sigue estos pasos:
+
+1. Asegúrate de que el servidor está en ejecución.
+2. Abre un navegador web y visita la siguiente URL:'http://localhost:8080/swagger-ui/'.
+3. Se debería mostrar la documentación de la API en el navegador.
