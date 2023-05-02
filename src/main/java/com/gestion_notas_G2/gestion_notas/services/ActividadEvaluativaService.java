@@ -15,18 +15,48 @@ public class ActividadEvaluativaService {
         this.actividadEvaluativaRepository = actividadEvaluativaRepository;
     }
 
+
+    /**
+     * Devuelve una lista con todas las actividades evaluativas almacenadas en el repositorio.
+     *
+     * @return Lista de objetos ActividadEvaluativa.
+     */
     public List<ActividadEvaluativa> getActividadEvaluativaList()  {
         return this.actividadEvaluativaRepository.findAll();
     }
 
+
+    /**
+     * Devuelve una lista con todas las actividades evaluativas del grupo especificado por su código.
+     *
+     * @param codigoGrupo El código del grupo del cual se desean obtener las actividades evaluativas.
+     * @return Lista de objetos ActividadEvaluativa.
+     */
     public List<ActividadEvaluativa> getActividadEvaluativaListByGrupo(String codigoGrupo) {
-        return this.actividadEvaluativaRepository.findAllByGrupo_CodigoGrupo(codigoGrupo);
+        return this.actividadEvaluativaRepository.findAllByGrupo_PeriodoAcademico_VigenteAndGrupo_CodigoGrupo(true, codigoGrupo);
     }
-    public List<ActividadEvaluativa> postActivadEvaluativaList(List<ActividadEvaluativa> actividadEvaluativaList, String codigoGrupo) throws Exception {
-        List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaRepository.findAllByGrupo_CodigoGrupo(codigoGrupo);
+
+
+    /**
+     * Guarda una lista de actividades evaluativas para un grupo especificado.
+     *
+     * @param actividadEvaluativaList Lista de objetos ActividadEvaluativa que se desea guardar.
+     * @param codigoGrupo El código del grupo para el cual se desean guardar las actividades evaluativas.
+     * @return Un mensaje de confirmación de la operación realizada.
+     * @throws IllegalArgumentException si la suma de los porcentajes de las actividades evaluativas supera el 100%.
+     * @throws Exception si ocurre algún error al intentar guardar los datos.
+     */
+    public String postActivadEvaluativaList(List<ActividadEvaluativa> actividadEvaluativaList, String codigoGrupo) throws Exception {
+        List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaRepository.findAllByGrupo_PeriodoAcademico_VigenteAndGrupo_CodigoGrupo(true, codigoGrupo);
+
+        if(actividadEvaluativaList.stream().mapToInt(ActividadEvaluativa::getPorcentaje).sum() > 100){
+            throw new IllegalArgumentException("No se pueden guardar las actividades evaluativas porque la suma de los porcentajes supera el 100%");
+        }
+        
         if(actividadEvaluativas.isEmpty()){
             try {
-                return this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+                this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+                return  "Las actividades evaluativas se han guardado correctamente.";
             } catch (Exception e){
                 throw new Exception("Ha ocurrido un error al guardar los datos");
             }
@@ -35,7 +65,8 @@ public class ActividadEvaluativaService {
             try {
                 actividadEvaluativas.removeIf(evaluacion -> actividadEvaluativaList.contains(evaluacion));
                 this.actividadEvaluativaRepository.deleteAll(actividadEvaluativas);
-                return this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+                this.actividadEvaluativaRepository.saveAll(actividadEvaluativaList);
+                return  "Las actividades evaluativas se han guardado correctamente.";
             }catch (Exception e){
                 throw new Exception("Ha ocurrido un error al guardar los datos");
             }
