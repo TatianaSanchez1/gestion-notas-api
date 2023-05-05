@@ -14,21 +14,15 @@ import java.util.Optional;
         this.grupoRepository = grupoRepository;
     }
 
-    public List<Grupo> getGrupos() throws Exception {
-        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findAll());
-        if(optionalGrupos.isPresent()){
-            return optionalGrupos.get();
-        }else{
-            throw new Exception("No se encontraron Grupos");
-        }
-    }
 
-    public List<Grupo> getGruposByProfesor(Long id) throws Exception {
-        Optional<List<Grupo>> optionalGrupos = Optional.ofNullable(this.grupoRepository.findGrupoByPeriodoAcademico_VigenteAndProfesor_Id(true, id));
-        if(optionalGrupos.isPresent()){
-            return optionalGrupos.get();
-        }else{
-            throw  new Exception("No se encontraron grupos");
-        }
+    /**
+     * Devuelve una lista de grupos que corresponden al profesor especificado.
+     *
+     * @param idProfesor El ID del profesor para el cual se desean obtener los grupos.
+     * @return Una lista de objetos Grupo que corresponden al profesor especificado.
+     * @throws Exception si ocurre algún error al intentar obtener los datos.
+     */
+    public List<Grupo> getGruposByProfesor(Long idProfesor) throws Exception {
+        return this.grupoRepository.findAllByPeriodoAcademico_VigenteAndProfesor_Id(true, idProfesor);
     }
 }

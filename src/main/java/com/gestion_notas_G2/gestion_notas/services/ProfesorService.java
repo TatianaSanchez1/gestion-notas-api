@@ -14,12 +14,31 @@ public class ProfesorService {
         this.profesorRespository = profesorRespository;
     }
 
+
+    /**
+     * Recupera una lista de todos los profesores en la base de datos.
+     *
+     * @return Una lista de objetos Profesor que contiene toda la información de los profesores almacenados.
+     */
     public List<Profesor> getProfesores(){
         return profesorRespository.findAll();
     }
 
-    public Profesor postProfesor(Profesor profesor){
-        return profesorRespository.save(profesor);
+
+    /**
+     * Crea un nuevo objeto Profesor en la base de datos.
+     *
+     * @param profesor Objeto Profesor con la información del nuevo profesor a crear.
+     * @return Un mensaje de confirmación si el profesor se crea exitosamente.
+     * @throws Exception si ocurre algún error al intentar crear el profesor.
+     */
+    public String postProfesor(Profesor profesor) throws Exception {
+        try {
+            profesorRespository.save(profesor);
+            return "Profesor creado exitosamente";
+        }catch (Exception e){
+            throw new Exception("Error al crear el profesor");
+        }
     }
 
 }

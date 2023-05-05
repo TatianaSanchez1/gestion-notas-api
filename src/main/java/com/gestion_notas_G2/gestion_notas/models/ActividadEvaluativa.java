@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "evaluacion")
@@ -22,6 +23,9 @@ public class ActividadEvaluativa {
     @JsonIgnore
     private List<NotaActividad> notaActividades;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean tieneNotas;
+
     public ActividadEvaluativa() {
     }
 
@@ -31,6 +35,7 @@ public class ActividadEvaluativa {
         this.porcentaje = porcentaje;
         this.grupo = grupo;
         this.notaActividades = notaActividades;
+        this.tieneNotas = false;
     }
 
     public Long getId() {
@@ -52,11 +57,16 @@ public class ActividadEvaluativa {
     public int getPorcentaje() {
         return porcentaje;
     }
-
+/*
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
+    }*/
+    public void setPorcentaje(int porcentaje) throws Exception {
+        if(porcentaje < 0 || porcentaje > 100){
+            throw new IllegalArgumentException("No se pueden guardar, uno o varios porcentajes de las actividades evalautivas no están en el rango permitido de 0 a 100.");
+        }
+        this.porcentaje = porcentaje;
     }
-
     public Grupo getGrupo() {
         return grupo;
     }
@@ -72,5 +82,22 @@ public class ActividadEvaluativa {
     public void setNotaActividades(List<NotaActividad> notaActividades) {
         this.notaActividades = notaActividades;
     }
+
+    public boolean isTieneNotas() {
+        return tieneNotas;
+    }
+
+    public void setTieneNotas(boolean tieneNotas) {
+        this.tieneNotas = tieneNotas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ActividadEvaluativa that = (ActividadEvaluativa) o;
+        return Objects.equals(id, that.id);
+    }
+
 }
 
