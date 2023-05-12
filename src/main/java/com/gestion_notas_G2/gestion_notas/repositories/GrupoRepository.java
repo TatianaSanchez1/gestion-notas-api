@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface GrupoRepository extends JpaRepository<Grupo, String> {
+public interface GrupoRepository extends JpaRepository<Grupo, Long> {
     public List<Grupo> findAllByPeriodoAcademico_VigenteAndProfesor_Id(Boolean vigente, Long id);
 }

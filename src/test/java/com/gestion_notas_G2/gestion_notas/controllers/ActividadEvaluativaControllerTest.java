@@ -42,10 +42,10 @@ class ActividadEvaluativaControllerTest {
     @Test
     void getActividadEvaluativaListByGrupoSuccess() {
         // arrange
-        when(actividadEvaluativaService.getActividadEvaluativaListByGrupo("G1")).thenReturn(actividadEvaluativaList);
+        when(actividadEvaluativaService.getActividadEvaluativaListByGrupo(1L)).thenReturn(actividadEvaluativaList);
 
         // act
-        ResponseEntity<Object> response = actividadEvaluativaController.getActividadEvaluativaListByGrupo("G1");
+        ResponseEntity<Object> response = actividadEvaluativaController.getActividadEvaluativaListByGrupo(1L);
 
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -56,10 +56,10 @@ class ActividadEvaluativaControllerTest {
     void getActividadEvaluativaListByGrupoException() {
         // arrange
         String errorMessage = "Error al obtener las actividades evaluativas";
-        when(actividadEvaluativaService.getActividadEvaluativaListByGrupo("G1")).thenThrow(new RuntimeException(errorMessage));
+        when(actividadEvaluativaService.getActividadEvaluativaListByGrupo(1L)).thenThrow(new RuntimeException(errorMessage));
 
         // act
-        ResponseEntity<Object> response = actividadEvaluativaController.getActividadEvaluativaListByGrupo("G1");
+        ResponseEntity<Object> response = actividadEvaluativaController.getActividadEvaluativaListByGrupo(1L);
 
         // assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -69,7 +69,7 @@ class ActividadEvaluativaControllerTest {
     @Test
     public void postActividadEvaluativaListSuccess() throws Exception {
         // Arrange
-        String codigoGrupo = "G1";
+        Long codigoGrupo = 1L;
         String expectedMessage = "Las actividades evaluativas se han guardado correctamente.";
 
         when(actividadEvaluativaService.postActivadEvaluativaList(actividadEvaluativaList, codigoGrupo))
@@ -86,7 +86,7 @@ class ActividadEvaluativaControllerTest {
     @Test
     public void postActividadEvaluativaList_InvalidArgument_Exception() throws Exception {
         // Arrange
-        String codigoGrupo = "G1";
+        Long codigoGrupo = 1l;
 
         when(actividadEvaluativaService.postActivadEvaluativaList(actividadEvaluativaList, codigoGrupo))
                 .thenThrow(new IllegalArgumentException("No se pueden guardar las actividades evaluativas porque la suma de los porcentajes supera el 100%"));
@@ -104,7 +104,7 @@ class ActividadEvaluativaControllerTest {
     @Test
     public void postActividadEvaluativaList_InternalServerError_Exception() throws Exception {
         // Arrange
-        String codigoGrupo = "G1";
+        Long codigoGrupo = 1L;
 
         when(actividadEvaluativaService.postActivadEvaluativaList(actividadEvaluativaList, codigoGrupo))
                 .thenThrow(new Exception("Ha ocurrido un error al guardar los datos"));

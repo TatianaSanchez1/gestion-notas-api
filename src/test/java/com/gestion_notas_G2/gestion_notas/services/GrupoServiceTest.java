@@ -28,7 +28,7 @@ class GrupoServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        grupo = new Grupo("1", "LM 20-22","Ude@", 25, null, null, null,null,null);
+        grupo = new Grupo(1L, "LM 20-22","Ude@", "25", null, null, null,null,null);
         grupoList = Collections.singletonList(grupo);
     }
 

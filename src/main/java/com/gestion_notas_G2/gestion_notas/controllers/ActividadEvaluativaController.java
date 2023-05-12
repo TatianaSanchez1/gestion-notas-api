@@ -35,7 +35,7 @@ public class ActividadEvaluativaController {
             @ApiResponse(code = 200, message = "OK", response = ActividadEvaluativa.class, responseContainer = "List"),
             @ApiResponse(code = 500, message = "Error interno del servidor")
     })
-    public ResponseEntity<Object> getActividadEvaluativaListByGrupo(@PathVariable String codigoGrupo) {
+    public ResponseEntity<Object> getActividadEvaluativaListByGrupo(@PathVariable Long codigoGrupo) {
         try {
             List<ActividadEvaluativa> actividadEvaluativaList = actividadEvaluativaService.getActividadEvaluativaListByGrupo(codigoGrupo);
             return new ResponseEntity<>(actividadEvaluativaList, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class ActividadEvaluativaController {
             @ApiResponse(code = 400, message = "Solicitud incorrecta"),
             @ApiResponse(code = 500, message = "Error interno del servidor")
     })
-    public ResponseEntity<Object> postActividadEvaluativaList(@RequestBody List<ActividadEvaluativa> actividadEvaluativaList, @PathVariable String codigoGrupo) {
+    public ResponseEntity<Object> postActividadEvaluativaList(@RequestBody List<ActividadEvaluativa> actividadEvaluativaList, @PathVariable Long codigoGrupo) {
         try {
             String message = this.actividadEvaluativaService.postActivadEvaluativaList(actividadEvaluativaList, codigoGrupo);
             return new ResponseEntity<>(message, HttpStatus.OK);

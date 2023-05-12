@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "persona")
 public class Estudiante extends Persona {
 
-    @Column(name = "programa_academico",nullable = false)
+    @Column(name = "programa_academico",nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'null'")
     private String programaAcademico;
     @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
     @JsonIgnore

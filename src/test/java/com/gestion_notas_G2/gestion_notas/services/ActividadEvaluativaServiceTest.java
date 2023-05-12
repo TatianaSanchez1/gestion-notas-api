@@ -24,7 +24,7 @@ class ActividadEvaluativaServiceTest {
     private ActividadEvaluativaService actividadEvaluativaService;
 
     private List<ActividadEvaluativa> actividadEvaluativaList;
-    private final String codigoGrupo = "G1";
+    private final Long codigoGrupo = 1L;
 
     @BeforeEach
     void setUp() {

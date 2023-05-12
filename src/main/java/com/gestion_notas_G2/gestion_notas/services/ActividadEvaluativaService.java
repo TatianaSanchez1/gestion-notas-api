@@ -32,7 +32,7 @@ public class ActividadEvaluativaService {
      * @param codigoGrupo El código del grupo del cual se desean obtener las actividades evaluativas.
      * @return Lista de objetos ActividadEvaluativa.
      */
-    public List<ActividadEvaluativa> getActividadEvaluativaListByGrupo(String codigoGrupo) {
+    public List<ActividadEvaluativa> getActividadEvaluativaListByGrupo(Long codigoGrupo) {
         return this.actividadEvaluativaRepository.findAllByGrupo_PeriodoAcademico_VigenteAndGrupo_CodigoGrupo(true, codigoGrupo);
     }
 
@@ -46,7 +46,7 @@ public class ActividadEvaluativaService {
      * @throws IllegalArgumentException si la suma de los porcentajes de las actividades evaluativas supera el 100%.
      * @throws Exception si ocurre algún error al intentar guardar los datos.
      */
-    public String postActivadEvaluativaList(List<ActividadEvaluativa> actividadEvaluativaList, String codigoGrupo) throws Exception {
+    public String postActivadEvaluativaList(List<ActividadEvaluativa> actividadEvaluativaList, Long codigoGrupo) throws Exception {
         List<ActividadEvaluativa> actividadEvaluativas = this.actividadEvaluativaRepository.findAllByGrupo_PeriodoAcademico_VigenteAndGrupo_CodigoGrupo(true, codigoGrupo);
 
         if(actividadEvaluativaList.stream().mapToInt(ActividadEvaluativa::getPorcentaje).sum() > 100){
