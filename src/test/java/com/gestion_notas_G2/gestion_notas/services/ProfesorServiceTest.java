@@ -1,7 +1,6 @@
 package com.gestion_notas_G2.gestion_notas.services;
 
 import com.gestion_notas_G2.gestion_notas.models.Profesor;
-import com.gestion_notas_G2.gestion_notas.repositories.ProfesorRespository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,7 +16,7 @@ import static org.mockito.Mockito.when;
 class ProfesorServiceTest {
 
     @Mock
-    private ProfesorRespository ProfesorRepository;
+    private com.gestion_notas_G2.gestion_notas.repositories.ProfesorRepository ProfesorRepository;
     @InjectMocks
     private ProfesorService profesorService;
 

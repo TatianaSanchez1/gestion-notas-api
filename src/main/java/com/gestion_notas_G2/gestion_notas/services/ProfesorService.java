@@ -1,17 +1,16 @@
 package com.gestion_notas_G2.gestion_notas.services;
 
-import com.gestion_notas_G2.gestion_notas.models.Profesor;
-import com.gestion_notas_G2.gestion_notas.repositories.ProfesorRespository;
-import org.springframework.stereotype.Service;
 
+import com.gestion_notas_G2.gestion_notas.models.Profesor;
+import com.gestion_notas_G2.gestion_notas.repositories.ProfesorRepository;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ProfesorService {
-    private ProfesorRespository profesorRespository;
-
-    public ProfesorService(ProfesorRespository profesorRespository){
-        this.profesorRespository = profesorRespository;
+    private ProfesorRepository profesorRepository;
+    public ProfesorService(ProfesorRepository profesorRepository){
+        this.profesorRepository = profesorRepository;
     }
 
 
@@ -21,7 +20,8 @@ public class ProfesorService {
      * @return Una lista de objetos Profesor que contiene toda la información de los profesores almacenados.
      */
     public List<Profesor> getProfesores(){
-        return profesorRespository.findAll();
+        List<Profesor> profesorList = profesorRepository.findAll();
+        return profesorList;
     }
 
 
@@ -34,7 +34,7 @@ public class ProfesorService {
      */
     public String postProfesor(Profesor profesor) throws Exception {
         try {
-            profesorRespository.save(profesor);
+            profesorRepository.save(profesor);
             return "Profesor creado exitosamente";
         }catch (Exception e){
             throw new Exception("Error al crear el profesor");

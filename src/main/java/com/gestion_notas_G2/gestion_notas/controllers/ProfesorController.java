@@ -1,5 +1,6 @@
 package com.gestion_notas_G2.gestion_notas.controllers;
 
+import com.gestion_notas_G2.gestion_notas.dto.ProfesorDTO;
 import com.gestion_notas_G2.gestion_notas.models.Profesor;
 import com.gestion_notas_G2.gestion_notas.services.ProfesorService;
 import io.swagger.annotations.ApiOperation;
