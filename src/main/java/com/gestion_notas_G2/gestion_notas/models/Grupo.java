@@ -9,13 +9,16 @@ import java.util.List;
 @Table(name = "grupo")
 public class Grupo {
     @Id
-    @Column(name = "codigo_grupo",nullable = false, updatable = false)
-    private String codigoGrupo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo_grupo", nullable = false, updatable = false)
+    private Long codigoGrupo;
+    @Column(nullable = false)
+    private String nombreGrupo;
     @Column(nullable = false)
     private String horario;
     @Column(nullable = false)
     private String aula;
-    @Column(name = "total_estudiantes")
+    @Column(name = "total_estudiantes", columnDefinition = "int default 0")
     private int totalEstudiantes;
     @ManyToOne
     private Curso curso;
@@ -33,24 +36,17 @@ public class Grupo {
     public Grupo() {
     }
 
-    public Grupo(String codigoGrupo, String horario, String aula, int totalEstudiantes, Curso curso, PeriodoAcademico periodoAcademico, List<Matricula> matriculas, List<ActividadEvaluativa> actividadesEvaluativas, Profesor profesor) {
+    public Grupo(Long codigoGrupo, String nombreGrupo, String horario, String aula, Curso curso, PeriodoAcademico periodoAcademico, List<Matricula> matriculas, List<ActividadEvaluativa> actividadesEvaluativas, Profesor profesor) {
         this.codigoGrupo = codigoGrupo;
+        this.nombreGrupo = nombreGrupo;
         this.horario = horario;
         this.aula = aula;
-        this.totalEstudiantes = totalEstudiantes;
+        this.totalEstudiantes = 0;
         this.curso = curso;
         this.periodoAcademico = periodoAcademico;
         this.matriculas = matriculas;
         this.actividadesEvaluativas = actividadesEvaluativas;
         this.profesor = profesor;
-    }
-
-    public String getCodigoGrupo() {
-        return codigoGrupo;
-    }
-
-    public void setCodigoGrupo(String codigoGrupo) {
-        this.codigoGrupo = codigoGrupo;
     }
 
     public String getHorario() {
@@ -115,5 +111,22 @@ public class Grupo {
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+
+    public String getNombreGrupo() {
+        return nombreGrupo;
+    }
+
+    public void setNombreGrupo(String nombreGrupo) {
+        this.nombreGrupo = nombreGrupo;
+    }
+
+    public Long getCodigoGrupo() {
+        return codigoGrupo;
+    }
+
+    public void setCodigoGrupo(Long codigoGrupo) {
+        this.codigoGrupo = codigoGrupo;
     }
 }

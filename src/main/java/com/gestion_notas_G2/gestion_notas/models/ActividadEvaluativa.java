@@ -10,7 +10,7 @@ import java.util.Objects;
 @Table(name = "evaluacion")
 public class ActividadEvaluativa {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
     @Column(nullable = false)
@@ -57,10 +57,7 @@ public class ActividadEvaluativa {
     public int getPorcentaje() {
         return porcentaje;
     }
-/*
-    public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje;
-    }*/
+
     public void setPorcentaje(int porcentaje) throws Exception {
         if(porcentaje < 0 || porcentaje > 100){
             throw new IllegalArgumentException("No se pueden guardar, uno o varios porcentajes de las actividades evalautivas no están en el rango permitido de 0 a 100.");

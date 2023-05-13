@@ -39,7 +39,7 @@ class GrupoControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        Grupo grupo = new Grupo("1", "LM 20-22", "Ude@", 25, null, null, null, null, null);
+        Grupo grupo = new Grupo(1l, "LM 20-22", "Ude@", "25", null, null, null, null, null);
         grupoList = Collections.singletonList(grupo);
     }
 
@@ -71,7 +71,7 @@ class GrupoControllerTest {
     }
 
     @Test
-    public void handleIllegalArgumentException() {
+    void handleIllegalArgumentException() {
         // Ejecutar método y verificar respuesta
         ResponseEntity<Object> response = grupoController.handleIllegalArgumentException(new IllegalArgumentException("Mensaje de prueba"));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

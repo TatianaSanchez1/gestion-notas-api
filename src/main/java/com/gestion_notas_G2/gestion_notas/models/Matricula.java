@@ -8,7 +8,8 @@ public class Matricula {
 
     @Id
     @Column(name = "id_matricula", nullable = false, updatable = false)
-    private String idMatricula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idMatricula;
     @ManyToOne
     private Estudiante estudiante;
     @ManyToOne
@@ -17,17 +18,17 @@ public class Matricula {
     public Matricula() {
     }
 
-    public Matricula(String idMatricula, Estudiante estudiante, Grupo grupo) {
+    public Matricula(Long idMatricula, Estudiante estudiante, Grupo grupo) {
         this.idMatricula = idMatricula;
         this.estudiante = estudiante;
         this.grupo = grupo;
     }
 
-    public String getIdMatricula() {
+    public Long getIdMatricula() {
         return idMatricula;
     }
 
-    public void setIdMatricula(String idMatricula) {
+    public void setIdMatricula(Long idMatricula) {
         this.idMatricula = idMatricula;
     }
 
