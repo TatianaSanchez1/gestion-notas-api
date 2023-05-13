@@ -4,7 +4,6 @@ import com.gestion_notas_G2.gestion_notas.dto.EstudianteDTO;
 import com.gestion_notas_G2.gestion_notas.models.Estudiante;
 import com.gestion_notas_G2.gestion_notas.repositories.MatriculaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 public class MatriculaService {
 
     private MatriculaRepository matriculaRepository;
-
 
     private ModelMapper modelMapper;
 

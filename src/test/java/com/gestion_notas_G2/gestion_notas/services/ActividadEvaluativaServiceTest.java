@@ -65,7 +65,7 @@ class ActividadEvaluativaServiceTest {
     }
 
     @Test
-    public void postActivadEvaluativaList_whenSumOfPorcentajesGreaterThan100_shouldThrowIllegalArgumentException() {
+    void postActivadEvaluativaList_whenSumOfPorcentajesGreaterThan100_shouldThrowIllegalArgumentException() {
         ActividadEvaluativa actividadEvaluativaAdd = new ActividadEvaluativa(1L, "unidad1", 80, null, null);
         actividadEvaluativaList.add(actividadEvaluativaAdd);
 

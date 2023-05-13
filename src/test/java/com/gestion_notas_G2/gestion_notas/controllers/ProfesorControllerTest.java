@@ -101,7 +101,7 @@ class ProfesorControllerTest {
     }
 
     @Test
-    public void handleIllegalArgumentException() {
+    void handleIllegalArgumentException() {
         // Ejecutar método y verificar respuesta
         ResponseEntity<Object> response = profesorController.handleIllegalArgumentException(new IllegalArgumentException("Mensaje de prueba"));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

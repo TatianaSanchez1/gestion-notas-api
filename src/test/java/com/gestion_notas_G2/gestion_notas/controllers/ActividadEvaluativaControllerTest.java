@@ -67,7 +67,7 @@ class ActividadEvaluativaControllerTest {
     }
 
     @Test
-    public void postActividadEvaluativaListSuccess() throws Exception {
+    void postActividadEvaluativaListSuccess() throws Exception {
         // Arrange
         Long codigoGrupo = 1L;
         String expectedMessage = "Las actividades evaluativas se han guardado correctamente.";
@@ -84,7 +84,7 @@ class ActividadEvaluativaControllerTest {
     }
 
     @Test
-    public void postActividadEvaluativaList_InvalidArgument_Exception() throws Exception {
+    void postActividadEvaluativaList_InvalidArgument_Exception() throws Exception {
         // Arrange
         Long codigoGrupo = 1l;
 
@@ -102,7 +102,7 @@ class ActividadEvaluativaControllerTest {
     }
 
     @Test
-    public void postActividadEvaluativaList_InternalServerError_Exception() throws Exception {
+    void postActividadEvaluativaList_InternalServerError_Exception() throws Exception {
         // Arrange
         Long codigoGrupo = 1L;
 
@@ -118,7 +118,7 @@ class ActividadEvaluativaControllerTest {
     }
 
     @Test
-    public void handleIllegalArgumentException() {
+    void handleIllegalArgumentException() {
         // Ejecutar método y verificar respuesta
         ResponseEntity<Object> response = actividadEvaluativaController.handleIllegalArgumentException(new IllegalArgumentException("Mensaje de prueba"));
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

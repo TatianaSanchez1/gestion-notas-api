@@ -1,6 +1,7 @@
 package com.gestion_notas_G2.gestion_notas.services;
 
 import com.gestion_notas_G2.gestion_notas.models.Profesor;
+import com.gestion_notas_G2.gestion_notas.repositories.ProfesorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.when;
 class ProfesorServiceTest {
 
     @Mock
-    private com.gestion_notas_G2.gestion_notas.repositories.ProfesorRepository ProfesorRepository;
+    private ProfesorRepository profesorRepository;
     @InjectMocks
     private ProfesorService profesorService;
 
@@ -33,7 +34,7 @@ class ProfesorServiceTest {
 
     @Test
     void getProfesores() {
-        when(ProfesorRepository.findAll()).thenReturn(profesorList);
+        when(profesorRepository.findAll()).thenReturn(profesorList);
         List<Profesor> expected = profesorList;
         List<Profesor> result = profesorService.getProfesores();
         assertEquals(expected,result);
@@ -41,7 +42,7 @@ class ProfesorServiceTest {
 
     @Test
     void postProfesor() throws Exception {
-        when(ProfesorRepository.save(profesor)).thenReturn(profesor);
+        when(profesorRepository.save(profesor)).thenReturn(profesor);
         String result = profesorService.postProfesor(profesor);
         String expect = "Profesor creado exitosamente";
         assertEquals(expect,result);
@@ -49,13 +50,13 @@ class ProfesorServiceTest {
 
     @Test
     void postProfesorException() throws Exception {
-        when(ProfesorRepository.save(profesor)).thenThrow(new RuntimeException("Error al crear el profesor"));
+        when(profesorRepository.save(profesor)).thenThrow(new RuntimeException("Error al crear el profesor"));
         Exception exception = assertThrows(Exception.class, () -> {
             profesorService.postProfesor(profesor);
         });
         String expect = "Error al crear el profesor";
         assertEquals(expect, exception.getMessage());
-        assertFalse(ProfesorRepository.existsById(profesor.getId()));
+        assertFalse(profesorRepository.existsById(profesor.getId()));
     }
 
 }
