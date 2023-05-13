@@ -15,11 +15,12 @@ public class MatriculaService {
 
     private MatriculaRepository matriculaRepository;
 
-    @Autowired
+
     private ModelMapper modelMapper;
 
-    public MatriculaService(MatriculaRepository matriculaRepository){
+    public MatriculaService(MatriculaRepository matriculaRepository, ModelMapper modelMapper){
         this.matriculaRepository = matriculaRepository;
+        this.modelMapper = modelMapper;
     }
 
 

@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service public class GrupoService {
     private GrupoRepository grupoRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
 
-    public GrupoService(GrupoRepository grupoRepository){
+    public GrupoService(GrupoRepository grupoRepository, ModelMapper modelMapper){
         this.grupoRepository = grupoRepository;
+        this.modelMapper = modelMapper;
     }
 
 
