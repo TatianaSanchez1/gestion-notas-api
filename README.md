@@ -17,7 +17,7 @@ Este módulo ha sido desarrollado utilizando las siguientes tecnologías:
 
 - Lenguaje de programación: Java
 - Framework de back-end: Spring Boot
-- Framework de front-end: Angular
+- Framework de front-end: React
 - Base de datos: MySQL
 
 ## Documentación API
